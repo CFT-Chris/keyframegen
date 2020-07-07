@@ -1,0 +1,35 @@
+{
+  "name": "keyframegen",
+  "version": "0.0.1",
+  "description": "A JS library that generates keyframes of common animations. For use with Web Animation API or plain CSS.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc --p tsconfig.json",
+    "clean": "rimraf ./dist",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "CFT-Chris",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "dist/"
+  ],
+  "keywords": [
+    "animation",
+    "css",
+    "javascript",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CFT-Chris/keyframegen"
+  },
+  "bugs": {
+    "url": "https://github.com/CFT-Chris/keyframegen/issues"
+  }
+}
