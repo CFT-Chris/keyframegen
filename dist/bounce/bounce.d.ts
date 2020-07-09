@@ -1,4 +1,4 @@
-import Matrix4D from './math/Matrix4D';
+import Matrix4D from './math/matrix4d';
 import { Component, ComponentOptions } from './components';
 import { WebAPIKeyframe } from '..';
 declare class Bounce {
@@ -10,10 +10,10 @@ declare class Bounce {
     styleElement: HTMLElement;
     keys: number[];
     constructor();
-    scale: (options: ComponentOptions) => Bounce;
-    rotate: (options: ComponentOptions) => Bounce;
-    translate: (options: ComponentOptions) => Bounce;
-    skew: (options: ComponentOptions) => Bounce;
+    scale: (options?: ComponentOptions) => Bounce;
+    rotate: (options?: ComponentOptions) => Bounce;
+    translate: (options?: ComponentOptions) => Bounce;
+    skew: (options?: ComponentOptions) => Bounce;
     addComponent(component: Component): Bounce;
     serialize: () => any[];
     deserialize(serialized: ComponentOptions[]): Bounce;
@@ -46,4 +46,4 @@ interface ApplyToOptions {
 interface BounceKeyframes {
     [key: number]: Matrix4D;
 }
-export default Bounce;
+export { Bounce };

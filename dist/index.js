@@ -1,2 +1,2 @@
-export * from './bounce/bounce';
+export { Bounce } from './bounce/bounce';
 //# sourceMappingURL=index.js.map

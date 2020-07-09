@@ -63,4 +63,4 @@ class Matrix4D {
     }
 }
 export default Matrix4D;
-//# sourceMappingURL=Matrix4D.js.map
+//# sourceMappingURL=matrix4d.js.map

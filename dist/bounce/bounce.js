@@ -1,4 +1,4 @@
-import Matrix4D from './math/Matrix4D';
+import Matrix4D from './math/matrix4d';
 import Scale from './components/scale';
 import Rotate from './components/rotate';
 import Translate from './components/translate';
@@ -72,7 +72,7 @@ class Bounce {
         this.keys.forEach(key => {
             matrix = keyframes[key];
             keyframeList.push({
-                offset: Math.round(key * 100 * 100) / 100,
+                offset: Math.round(key * 1000) / 1000,
                 transform: `matrix3d${matrix}`
             });
         });
@@ -187,5 +187,5 @@ class Bounce {
 Bounce.FPS = 30;
 Bounce.counter = 1;
 Bounce.generateName = () => `animation-${Bounce.counter++}`;
-export default Bounce;
+export { Bounce };
 //# sourceMappingURL=bounce.js.map

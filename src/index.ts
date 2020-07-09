@@ -1,4 +1,4 @@
-export * from './bounce/bounce';
+export { Bounce } from './bounce/bounce';
 
 export interface WebAPIKeyframe {
   offset: number,

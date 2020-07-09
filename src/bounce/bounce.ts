@@ -1,4 +1,4 @@
-import Matrix4D from './math/Matrix4D';
+import Matrix4D from './math/matrix4d';
 import Scale from './components/scale';
 import Rotate from './components/rotate';
 import Translate from './components/translate';
@@ -27,10 +27,10 @@ class Bounce {
     this.components = [];
   }
 
-  scale = (options: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.scale(options));
-  rotate = (options: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.rotate(options));
-  translate = (options: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.translate(options));
-  skew = (options: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.skew(options));
+  scale = (options?: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.scale(options));
+  rotate = (options?: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.rotate(options));
+  translate = (options?: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.translate(options));
+  skew = (options?: ComponentOptions): Bounce => this.addComponent(new ComponentClasses.skew(options));
 
   addComponent(component: Component): Bounce {
     this.components.push(component);
@@ -98,7 +98,7 @@ class Bounce {
     this.keys.forEach(key => {
       matrix = keyframes[key];
       keyframeList.push({
-        offset: Math.round(key * 100 * 100) / 100,
+        offset: Math.round(key * 1000) / 1000,
         transform: `matrix3d${matrix}`
       });
     });
@@ -265,4 +265,4 @@ interface BounceKeyframes {
   [key: number]: Matrix4D
 }
 
-export default Bounce;
+export { Bounce };
