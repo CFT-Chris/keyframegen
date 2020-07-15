@@ -1,5 +1,2 @@
-export { Bounce } from './bounce/bounce';
-export interface WebAPIKeyframe {
-    offset: number;
-    transform: string;
-}
+export { Complex } from './complex/complex';
+export { Simple } from './simple/simple';

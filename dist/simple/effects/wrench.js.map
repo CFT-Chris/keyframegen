@@ -1,0 +1,1 @@
+{"version":3,"file":"wrench.js","sourceRoot":"","sources":["../../../src/simple/effects/wrench.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAiB,MAAM,GAAG,CAAC;AAE1C,MAAM,MAAO,SAAQ,MAAM;IAEzB,YAAY,OAAsB;QAChC,KAAK,CAAC,OAAO,CAAC,CAAC;QAEf,IAAI,CAAC,SAAS,GAAG;YACf,EAAE,MAAM,EAAE,CAAC,EAAE;SACd,CAAC;IACJ,CAAC;CAEF;AAMD,OAAO,EAAE,MAAM,EAAiB,CAAC"}
