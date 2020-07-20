@@ -1,3 +1,4 @@
+
 class Matrix4D {
   private _array: number[];
 

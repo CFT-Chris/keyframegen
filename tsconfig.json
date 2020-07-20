@@ -18,5 +18,19 @@
   },
   "files": [
     "src/index.ts"
-  ]
+  ],
+  "typedocOptions": {
+    "inputFiles": ["./src/index.ts"],
+    "mode": "file",
+    "out": "docs",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "disableSources": true,
+    "includeVersion": true,
+    "stripInternal": true,
+    "toc": [
+      "Complex",
+      "Simple"
+    ]
+  }
 }

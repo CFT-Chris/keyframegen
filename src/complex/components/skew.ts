@@ -1,15 +1,15 @@
 import Matrix4D from '../math/matrix4d';
 import Vector2D from '../math/vector2d';
 
-import { Component, ComponentCoord, ComponentOptions } from './index';
+import { Component, Coordinate, ComponentOptions } from './index';
 
 class Skew extends Component {
-  from: ComponentCoord = {
+  from: Coordinate = {
     x: 0,
     y: 0
   };
 
-  to: ComponentCoord = {
+  to: Coordinate = {
     x: 20, 
     y: 0
   }

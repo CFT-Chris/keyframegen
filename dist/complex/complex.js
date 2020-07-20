@@ -4,20 +4,31 @@ import Rotate from './components/rotate';
 import Translate from './components/translate';
 import Skew from './components/skew';
 import { KeyframeGenerator } from '../keyframegen';
-const ComponentClasses = {
-    scale: Scale,
-    rotate: Rotate,
-    translate: Translate,
-    skew: Skew
-};
+/**
+ * Construct a complex 2D animation using a composition of any number of the following transforms:
+ * * scale
+ * * rotate
+ * * translate
+ * * skew
+ *
+ * See {@link ComponentOptions} for a list of options that can be applied per transformation component.
+ *
+ * ## Basic Usage
+ * ```ts
+ * new Complex()
+ *   .scale({ from: 0.5, to: 1, duration: 250 })
+ *   .rotate({ from: -90, to: 0, delay: 250, duration: 500 })
+ *   .get();
+ * ```
+ */
 class Complex extends KeyframeGenerator {
     constructor() {
         super();
         this.components = null;
-        this.scale = (options) => this.addComponent(new ComponentClasses.scale(options));
-        this.rotate = (options) => this.addComponent(new ComponentClasses.rotate(options));
-        this.translate = (options) => this.addComponent(new ComponentClasses.translate(options));
-        this.skew = (options) => this.addComponent(new ComponentClasses.skew(options));
+        this.scale = (options) => this.addComponent(new Complex.ComponentClasses.scale(options));
+        this.rotate = (options) => this.addComponent(new Complex.ComponentClasses.rotate(options));
+        this.translate = (options) => this.addComponent(new Complex.ComponentClasses.translate(options));
+        this.skew = (options) => this.addComponent(new Complex.ComponentClasses.skew(options));
         this.serialize = () => this.components.map(component => component.serialize());
         this.components = [];
     }
@@ -28,8 +39,8 @@ class Complex extends KeyframeGenerator {
     }
     deserialize(serialized) {
         serialized.forEach(options => {
-            if (ComponentClasses.hasOwnProperty(options.type))
-                this.addComponent(new ComponentClasses[options.type](options));
+            if (Complex.ComponentClasses.hasOwnProperty(options.type))
+                this.addComponent(new Complex.ComponentClasses[options.type](options));
         });
         return (this);
     }
@@ -87,6 +98,12 @@ class Complex extends KeyframeGenerator {
         return (keyframes);
     }
 }
+Complex.ComponentClasses = {
+    scale: Scale,
+    rotate: Rotate,
+    translate: Translate,
+    skew: Skew
+};
 Complex.FPS = 30;
 export { Complex };
 //# sourceMappingURL=complex.js.map
