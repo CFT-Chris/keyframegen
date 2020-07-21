@@ -1,11 +1,39 @@
 import { KeyframeGenerator, WebAPIKeyframe, KeyframeOptions } from '../keyframegen';
-import { WrenchOptions } from './effects/wrench';
-import { TadaOptions } from './effects/tada';
+import { BouncingOptions } from './effects/bouncing';
+import { BurstOptions } from './effects/burst';
+import { FallingOptions } from './effects/falling';
+import { FlashingOptions } from './effects/flashing';
+import { FloatingOptions } from './effects/floating';
+import { HorizontalOptions } from './effects/horizontal';
+import { LaunchRightOptions } from './effects/launchright';
+import { LaunchUpOptions } from './effects/launchup';
+import { OpenRightOutOptions } from './effects/openrightout';
+import { PassingOptions } from './effects/passing';
+import { PulseOptions } from './effects/pulse';
+import { RingingOptions } from './effects/ringing';
 import { ShakeOptions } from './effects/shake';
+import { SpinnerOptions } from './effects/spinner';
+import { TadaOptions } from './effects/tada';
+import { WrenchOptions } from './effects/wrench';
+import { VerticalOptions } from './effects/vertical';
 interface SimpleEffects {
+    bouncing: BouncingOptions;
+    burst: BurstOptions;
+    falling: FallingOptions;
+    flashing: FlashingOptions;
+    floating: FloatingOptions;
+    horizontal: HorizontalOptions;
+    launchright: LaunchRightOptions;
+    launchup: LaunchUpOptions;
+    openrightout: OpenRightOutOptions;
+    passing: PassingOptions;
+    pulse: PulseOptions;
+    ringing: RingingOptions;
     shake: ShakeOptions;
+    spinner: SpinnerOptions;
     tada: TadaOptions;
     wrench: WrenchOptions;
+    vertical: VerticalOptions;
 }
 /**
  * Choose from a variety of basic 2D animations.

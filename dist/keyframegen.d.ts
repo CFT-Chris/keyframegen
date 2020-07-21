@@ -35,7 +35,9 @@ export declare class KeyframeGenerator {
 }
 export interface WebAPIKeyframe {
     offset: number;
+    easing?: string;
     transform?: string;
+    'transform-origin'?: string;
     opacity?: number | string;
 }
 export interface KeyframeOptions {

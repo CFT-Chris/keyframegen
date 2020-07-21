@@ -1,7 +1,21 @@
 import { KeyframeGenerator } from '../keyframegen';
-import { Wrench } from './effects/wrench';
-import { Tada } from './effects/tada';
+import { Bouncing } from './effects/bouncing';
+import { Burst } from './effects/burst';
+import { Falling } from './effects/falling';
+import { Flashing } from './effects/flashing';
+import { Floating } from './effects/floating';
+import { Horizontal } from './effects/horizontal';
+import { LaunchRight } from './effects/launchright';
+import { LaunchUp } from './effects/launchup';
+import { OpenRightOut } from './effects/openrightout';
+import { Passing } from './effects/passing';
+import { Pulse } from './effects/pulse';
+import { Ringing } from './effects/ringing';
 import { Shake } from './effects/shake';
+import { Spinner } from './effects/spinner';
+import { Tada } from './effects/tada';
+import { Wrench } from './effects/wrench';
+import { Vertical } from './effects/vertical';
 /**
  * Choose from a variety of basic 2D animations.
  *
@@ -38,9 +52,23 @@ class Simple extends KeyframeGenerator {
     }
 }
 Simple.EffectClasses = Object.freeze({
+    bouncing: Bouncing,
+    burst: Burst,
+    falling: Falling,
+    flashing: Flashing,
+    floating: Floating,
+    horizontal: Horizontal,
+    launchright: LaunchRight,
+    launchup: LaunchUp,
+    openrightout: OpenRightOut,
+    passing: Passing,
+    pulse: Pulse,
+    ringing: Ringing,
     shake: Shake,
+    spinner: Spinner,
     tada: Tada,
-    wrench: Wrench
+    wrench: Wrench,
+    vertical: Vertical
 });
 export { Simple };
 //# sourceMappingURL=simple.js.map

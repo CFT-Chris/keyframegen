@@ -6,17 +6,23 @@ A JavaScript/TypeScript library that generates keyframes of common animations.  
 npm i keyframegen
 ```
 
-## Usage
+## ES Module Usage
 ```ts
 import { Complex } from 'keyframegen';
 
 const complexKeyframes = new Complex();
 
+// Chain as many transformations (scale, rotate, transform, skew) together as you wish
+// using options to control duration, delay and easing of each transformation
 complexKeyframes.scale();
 
+// Output as CSS or Web Animation keyframe objects, or apply animation to an HTML element
 console.log(complexKeyframes.get('css'));
 console.log(complexKeyframes.get('webapi'));
+complexKeyframes.applyTo(document.getElementById('myAnimatedElement'));
 ```
+
+
 
 <details><summary>Output from complexKeyframes</summary><pre>
 @keyframes animation-1 { 
@@ -92,13 +98,18 @@ console.log(complexKeyframes.get('webapi'));
 ```ts
 import { Simple } from 'keyframegen';
 
-const simpleAnimation = new Simple();
+const simpleKeyframes = new Simple();
 
-simpleAnimation.set('shake');
-  
-console.log(simpleAnimation.get('css'));
-console.log(simpleAnimation.get('webapi'));
+// Select one of many preset animations with options to fine tune their appearance
+simpleKeyframes.set('shake');
+
+// Output as CSS or Web Animation keyframe objects, or apply animation to an HTML element
+console.log(simpleKeyframes.get('css'));
+console.log(simpleKeyframes.get('webapi'));
+simpleKeyframes.applyTo(document.getElementById('myAnimatedElement'));
 ```
+
+
 
 <details><summary>Output from simpleKeyframes</summary><pre>
 @keyframes animation-1 { 
@@ -131,8 +142,11 @@ console.log(simpleAnimation.get('webapi'));
   __proto__: Array(0)
 </pre></details>
 
-## API
-View the [documentation](https://todo).
+## Other Usage
+Include [dist/keyframegen.min.js](https://raw.githubusercontent.com/CFT-Chris/keyframegen/master/dist/keyframegen.min.js). Exports `Complex` and `Simple`.
+
+## Full API
+View the [documentation](https://cft-chris.github.io/keyframegen).
 
 ### Todo
 * Interactive Sandbox

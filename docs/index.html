@@ -72,17 +72,21 @@
 					<h2>Installation</h2>
 				</a>
 				<pre><code><span class="hljs-built_in">npm</span> i keyframegen</code></pre>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
+				<a href="#es-module-usage" id="es-module-usage" style="color: inherit; text-decoration: none;">
+					<h2>ES Module Usage</h2>
 				</a>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Complex } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;keyframegen&#x27;</span>;
 
 <span class="hljs-keyword">const</span> complexKeyframes = <span class="hljs-keyword">new</span> Complex();
 
+<span class="hljs-comment">// Chain as many transformations (scale, rotate, transform, skew) together as you wish</span>
+<span class="hljs-comment">// using options to control duration, delay and easing of each transformation</span>
 complexKeyframes.scale();
 
+<span class="hljs-comment">// Output as CSS or Web Animation keyframe objects, or apply animation to an HTML element</span>
 <span class="hljs-built_in">console</span>.log(complexKeyframes.get(<span class="hljs-string">&#x27;css&#x27;</span>));
-<span class="hljs-built_in">console</span>.log(complexKeyframes.get(<span class="hljs-string">&#x27;webapi&#x27;</span>));</code></pre>
+<span class="hljs-built_in">console</span>.log(complexKeyframes.get(<span class="hljs-string">&#x27;webapi&#x27;</span>));
+complexKeyframes.applyTo(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myAnimatedElement&#x27;</span>));</code></pre>
 				<details><summary>Output from complexKeyframes</summary><pre>
 @keyframes animation-1 { 
   0% { transform: matrix3d(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
@@ -155,12 +159,15 @@ complexKeyframes.scale();
 </pre></details></p>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Simple } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;keyframegen&#x27;</span>;
 
-<span class="hljs-keyword">const</span> simpleAnimation = <span class="hljs-keyword">new</span> Simple();
+<span class="hljs-keyword">const</span> simpleKeyframes = <span class="hljs-keyword">new</span> Simple();
 
-simpleAnimation.set(<span class="hljs-string">&#x27;shake&#x27;</span>);
+<span class="hljs-comment">// Select one of many preset animations with options to fine tune their appearance</span>
+simpleKeyframes.set(<span class="hljs-string">&#x27;shake&#x27;</span>);
 
-<span class="hljs-built_in">console</span>.log(simpleAnimation.get(<span class="hljs-string">&#x27;css&#x27;</span>));
-<span class="hljs-built_in">console</span>.log(simpleAnimation.get(<span class="hljs-string">&#x27;webapi&#x27;</span>));</code></pre>
+<span class="hljs-comment">// Output as CSS or Web Animation keyframe objects, or apply animation to an HTML element</span>
+<span class="hljs-built_in">console</span>.log(simpleKeyframes.get(<span class="hljs-string">&#x27;css&#x27;</span>));
+<span class="hljs-built_in">console</span>.log(simpleKeyframes.get(<span class="hljs-string">&#x27;webapi&#x27;</span>));
+simpleKeyframes.applyTo(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myAnimatedElement&#x27;</span>));</code></pre>
 				<details><summary>Output from simpleKeyframes</summary><pre>
 @keyframes animation-1 { 
   0% { transform: rotate(-14.999999999999998deg); }
@@ -191,10 +198,14 @@ simpleAnimation.set(<span class="hljs-string">&#x27;shake&#x27;</span>);
   length: 11
   <strong>proto</strong>: Array(0)
 </pre></details></p>
-				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
-					<h2>API</h2>
+				<a href="#other-usage" id="other-usage" style="color: inherit; text-decoration: none;">
+					<h2>Other Usage</h2>
 				</a>
-				<p>View the <a href="https://todo">documentation</a>.</p>
+				<p>Include <a href="https://raw.githubusercontent.com/CFT-Chris/keyframegen/master/dist/keyframegen.min.js">dist/keyframegen.min.js</a>. Exports <code>Complex</code> and <code>Simple</code>.</p>
+				<a href="#full-api" id="full-api" style="color: inherit; text-decoration: none;">
+					<h2>Full API</h2>
+				</a>
+				<p>View the <a href="https://cft-chris.github.io/keyframegen">documentation</a>.</p>
 				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
 					<h3>Todo</h3>
 				</a>

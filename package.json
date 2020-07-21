@@ -2,10 +2,11 @@
   "name": "keyframegen",
   "version": "0.0.1",
   "description": "A JS library that generates keyframes of common animations. For use with Web Animation API or plain CSS.",
-  "main": "dist/index.js",
+  "main": "dist/keyframegen.min.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npm run clean && tsc --p tsconfig.json && typedoc",
+    "build": "npm run clean && tsc --p tsconfig.json && typedoc && rollup --config ./rollup.config.js",
     "clean": "rimraf ./dist ./docs",
     "prepublishOnly": "npm run build"
   },
@@ -13,7 +14,10 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.4.0",
     "rimraf": "^3.0.0",
+    "rollup": "^2.22.1",
+    "rollup-plugin-terser": "^6.1.0",
     "typedoc": "^0.17.8",
     "typescript": "^3.2.4"
   },
