@@ -28,6 +28,7 @@
     "disableSources": true,
     "includeVersion": true,
     "stripInternal": true,
+    "hideGenerator": true,
     "toc": [
       "Complex",
       "Simple"

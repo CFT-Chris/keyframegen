@@ -148,6 +148,9 @@ Include [dist/keyframegen.min.js](https://raw.githubusercontent.com/CFT-Chris/ke
 ## Full API
 View the [documentation](https://cft-chris.github.io/keyframegen).
 
+## GitHub Repo
+View the [GitHub repo](https://github.com/CFT-Chris/keyframegen).
+
 ### Todo
 * Interactive Sandbox
 * 3D transformations for Complex
