@@ -3,12 +3,6 @@ import EasingBounce from '../easing/bounce';
 import SwayEasing from '../easing/sway';
 import HardBounce from '../easing/hardbounce';
 import HardSwayEasing from '../easing/hardsway';
-const EasingClasses = {
-    bounce: EasingBounce,
-    sway: SwayEasing,
-    hardbounce: HardBounce,
-    hardsway: HardSwayEasing
-};
 class Component {
     constructor(options = {}) {
         this.easing = 'bounce';
@@ -27,11 +21,17 @@ class Component {
             to: this.to
         }, this.easingObject.serialize());
         Object.assign(this, options);
-        this.easingObject = new EasingClasses[this.easing](options);
+        this.easingObject = new Component.EasingClasses[this.easing](options);
     }
     calculateEase(ratio) {
         return (this.easingObject.calculate(ratio));
     }
 }
+Component.EasingClasses = {
+    bounce: EasingBounce,
+    sway: SwayEasing,
+    hardbounce: HardBounce,
+    hardsway: HardSwayEasing
+};
 export { Component };
 //# sourceMappingURL=index.js.map

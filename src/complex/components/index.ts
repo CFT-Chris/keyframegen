@@ -5,25 +5,28 @@ import HardBounce from '../easing/hardbounce';
 import HardSwayEasing from '../easing/hardsway';
 import { EasingOptions, Easing } from '../easing';
 
-const EasingClasses: { [type: string]: any } = {
-  bounce: EasingBounce,
-  sway: SwayEasing,
-  hardbounce: HardBounce,
-  hardsway: HardSwayEasing
-};
+type EasingType = 'bounce' | 'sway' | 'hardbounce' | 'hardsway';
 
 class Component {
+
+  private static readonly EasingClasses: { [type: string]: any } = {
+    bounce: EasingBounce,
+    sway: SwayEasing,
+    hardbounce: HardBounce,
+    hardsway: HardSwayEasing
+  };
+
   easing: string = 'bounce';
   duration: number = 1000;
   delay: number = 0;
-  from: ComponentCoord | number = null;
-  to: ComponentCoord | number = null;
+  from: Coordinate | number = null;
+  to: Coordinate | number = null;
   easingObject: Easing;
 
   constructor(options: ComponentOptions = {}) {
     Object.assign(this, options);
 
-    this.easingObject = new EasingClasses[this.easing](options);
+    this.easingObject = new Component.EasingClasses[this.easing](options);
   }
 
   calculateEase(ratio: number): number {
@@ -45,17 +48,35 @@ class Component {
 }
 
 interface ComponentOptions extends EasingOptions {
+  /**
+   * @internal
+   */
   type?: string,
-  easing?: string,
+  /**
+   * Easing to the apply to the animation keyframes for this component.  Defaults to **bounce**.
+   */
+  easing?: EasingType,
+  /**
+   * Duration in milliseconds of the component animation.  Defaults to **1000**.
+   */
   duration?: number,
+  /**
+   * Milliseconds to wait prior to starting this component of the animation.  Defaults to **0**.
+   */
   delay?: number,
-  from?: ComponentCoord | number,
-  to?: ComponentCoord | number
+  /**
+   * Starting point of the animation component.  Default depends on animation component chosen.
+   */
+  from?: Coordinate | number,
+  /**
+   * Ending point of the animation component.  Default depends on animation component chosen.
+   */
+  to?: Coordinate | number
 }
 
-interface ComponentCoord {
+interface Coordinate {
   x: number,
   y: number
 }
 
-export { Component, ComponentOptions, ComponentCoord };
+export { Component, ComponentOptions, Coordinate };

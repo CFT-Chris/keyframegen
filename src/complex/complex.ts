@@ -6,46 +6,63 @@ import Skew from './components/skew';
 import { Component, ComponentOptions } from './components';
 import { KeyframeGenerator, WebAPIKeyframe, KeyframeOptions } from '../keyframegen';
 
-const ComponentClasses: { [type: string]: any } = {
-  scale: Scale,
-  rotate: Rotate,
-  translate: Translate,
-  skew: Skew
-};
-
+/**
+ * Construct a complex 2D animation using a composition of any number of the following transforms:
+ * * scale
+ * * rotate
+ * * translate
+ * * skew
+ * 
+ * See {@link ComponentOptions} for a list of options that can be applied per transformation component.
+ * 
+ * ## Basic Usage
+ * ```ts
+ * new Complex()
+ *   .scale({ from: 0.5, to: 1, duration: 250 })
+ *   .rotate({ from: -90, to: 0, delay: 250, duration: 500 })
+ *   .get();
+ * ```
+ */
 class Complex extends KeyframeGenerator {
-  static FPS: number = 30;
 
-  components: Component[] = null;
-  keys: number[];
+  protected static readonly ComponentClasses: { [type: string]: any } = {
+    scale: Scale,
+    rotate: Rotate,
+    translate: Translate,
+    skew: Skew
+  };
+  protected static FPS: number = 30;
+
+  protected components: Component[] = null;
+  protected keys: number[];
 
   constructor() {
     super();
     this.components = [];
   }
 
-  scale = (options?: ComponentOptions): Complex => this.addComponent(new ComponentClasses.scale(options));
-  rotate = (options?: ComponentOptions): Complex => this.addComponent(new ComponentClasses.rotate(options));
-  translate = (options?: ComponentOptions): Complex => this.addComponent(new ComponentClasses.translate(options));
-  skew = (options?: ComponentOptions): Complex => this.addComponent(new ComponentClasses.skew(options));
+  scale = (options?: ComponentOptions): this => this.addComponent(new Complex.ComponentClasses.scale(options));
+  rotate = (options?: ComponentOptions): this => this.addComponent(new Complex.ComponentClasses.rotate(options));
+  translate = (options?: ComponentOptions): this => this.addComponent(new Complex.ComponentClasses.translate(options));
+  skew = (options?: ComponentOptions): this => this.addComponent(new Complex.ComponentClasses.skew(options));
 
-  private addComponent(component: Component): Complex {
+  private addComponent(component: Component): this {
     this.components.push(component);
     this.updateDuration();
 
     return(this);
   }
 
-  serialize = (): any[] => this.components.map(component => component.serialize());
-  deserialize(serialized: ComponentOptions[]): Complex {
+  protected serialize = (): any[] => this.components.map(component => component.serialize());
+  protected deserialize(serialized: ComponentOptions[]): this {
     serialized.forEach(options => {
-      if (ComponentClasses.hasOwnProperty(options.type))
-        this.addComponent(new ComponentClasses[options.type](options));
+      if (Complex.ComponentClasses.hasOwnProperty(options.type))
+        this.addComponent(new Complex.ComponentClasses[options.type](options));
     });
     return(this);
   }
 
-  updateDuration(): void {
+  protected updateDuration(): void {
     this.duration = this.components
       .map(component => component.duration + component.delay)
       .reduce((a, b) => Math.max(a, b), 0);

@@ -9,14 +9,13 @@ export class KeyframeGenerator {
     updateDuration(duration) {
         this.duration = duration || this.duration;
     }
-    remove() {
-        if (this.styleElement) {
-            if (this.styleElement.remove)
-                this.styleElement.remove();
-            else if (this.styleElement.parentNode)
-                this.styleElement.parentNode.removeChild(this.styleElement);
-        }
-    }
+    /**
+     * Retrieve keyframes to embed as CSS or as an array of Animation Keyframe objects to use with
+     * Web Animation API.
+     * @param type Defaults to `'webapi'`
+     * @param options Output options. See {@link KeyframeOptions}
+     * @returns CSS or array of objects depending on the type given
+     */
     get(type, options = {}) {
         let ret = null;
         const keyframes = this.getWebAPIKeyframes(options);
@@ -48,7 +47,7 @@ export class KeyframeGenerator {
                     }
                     if (transforms.length > 0)
                         transitions.push(transforms.join(' '));
-                    verbatimTransitions.forEach(property => {
+                    KeyframeGenerator.verbatimTransitions.forEach(property => {
                         if (property in keyframe)
                             transitions.push(`${property}: ${keyframe[property]};`);
                     });
@@ -69,10 +68,18 @@ export class KeyframeGenerator {
         }
         return (ret);
     }
-    applyTo(v, options = {}) {
-        const elements = !Array.isArray(v)
-            ? [v]
-            : v;
+    /**
+     * Apply this animation to an HTML element or array of HTML elements.
+     * Embeds a style element in the HTML document with the animations and keyframes,
+     * and then sets the CSS of the given HTML elements to use those animations.
+     * @param el
+     * @param options
+     * @returns Promise that resolves once the animation is completed.  Infinite animations never resolve.
+     */
+    applyTo(el, options = {}) {
+        const elements = !Array.isArray(el)
+            ? [el]
+            : el;
         let prefixes, css;
         this.define();
         prefixes = this.getPrefixes();
@@ -96,6 +103,14 @@ export class KeyframeGenerator {
             }
         }));
     }
+    remove() {
+        if (this.styleElement) {
+            if (this.styleElement.remove)
+                this.styleElement.remove();
+            else if (this.styleElement.parentNode)
+                this.styleElement.parentNode.removeChild(this.styleElement);
+        }
+    }
     define(name) {
         this.name = name || KeyframeGenerator.generateName();
         this.styleElement = document.createElement('style');
@@ -115,6 +130,9 @@ export class KeyframeGenerator {
             prefixes.animation = ['-webkit-', ''];
         return (prefixes);
     }
+    /**
+     * @returns Does the browser have CSS support for animations?
+     */
     static isSupported() {
         const style = document.createElement("dummy").style;
         const propertyLists = [
@@ -133,7 +151,7 @@ export class KeyframeGenerator {
         return (supported);
     }
 }
+KeyframeGenerator.verbatimTransitions = ['opacity'];
 KeyframeGenerator.counter = 1;
 KeyframeGenerator.generateName = () => `animation-${KeyframeGenerator.counter++}`;
-const verbatimTransitions = ['opacity'];
 //# sourceMappingURL=keyframegen.js.map
