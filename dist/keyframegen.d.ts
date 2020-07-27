@@ -2,6 +2,7 @@ export declare class KeyframeGenerator {
     private static readonly verbatimTransitions;
     private static counter;
     private styleElement;
+    private unfinishedAnimations;
     private name;
     protected duration: number;
     constructor();
@@ -24,7 +25,11 @@ export declare class KeyframeGenerator {
      * @returns Promise that resolves once the animation is completed.  Infinite animations never resolve.
      */
     applyTo(el: HTMLElement | HTMLElement[], options?: ApplyToOptions): Promise<void>;
-    private remove;
+    /**
+     * Stop all animations that were created with applyTo.
+     */
+    abort(): void;
+    private cleanup;
     private define;
     protected getPrefixes(force?: boolean): CSSPropPrefixes;
     protected static generateName: () => string;
@@ -69,11 +74,6 @@ interface ApplyToOptions {
      * Play the animation infinitely.
      */
     loop?: boolean;
-    /**
-     * Remove the animation property from the element and CSS style element from the document
-     * after the animation is done.
-     */
-    remove?: boolean;
     /**
      * Callback specified function after the animation is done.
      */

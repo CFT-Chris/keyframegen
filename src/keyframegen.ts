@@ -4,6 +4,7 @@ export class KeyframeGenerator {
   private static counter: number = 1;
   
   private styleElement: HTMLElement;
+  private unfinishedAnimations: Array<() => void> = [];
   private name: string;
   protected duration: number = 0;
 
@@ -109,6 +110,19 @@ export class KeyframeGenerator {
     prefixes = this.getPrefixes();
 
     return (new Promise(resolve => {
+      const finish = () => {
+        elements.forEach(element => {
+          prefixes.animation.forEach(prefix => {
+            element.style.removeProperty(`${prefix}animation`);
+          });
+        });
+
+        if (options.onComplete)
+          options.onComplete();
+
+        resolve();
+      };
+
       elements.forEach(element => {
         prefixes.animation.forEach(prefix => {
           css = [this.name, `${this.duration}ms`, 'linear', 'both'];
@@ -122,32 +136,57 @@ export class KeyframeGenerator {
 
       if (!options.loop) {
         setTimeout(() => {
-          if (options.remove)
-            this.remove();
-          if (options.onComplete)
-            options.onComplete();
+          const index = this.unfinishedAnimations.indexOf(finish);
 
-          resolve();
+          if (index >= 0) {
+            this.unfinishedAnimations.splice(index, 1);
+            finish();
+
+            this.cleanup();
+          }
         }, this.duration);
       }
+
+      this.unfinishedAnimations.push(finish);
     }));
   }
 
-  private remove(): void {
-    if (this.styleElement) {
+  /**
+   * Stop all animations that were created with applyTo.
+   */
+  abort() {
+    let finish: () => void;
+
+    while(finish = this.unfinishedAnimations.shift()) {
+      finish();
+    };
+
+    this.cleanup();
+  }
+
+  private cleanup(): void {
+    if (this.unfinishedAnimations.length === 0 && this.styleElement) {
       if (this.styleElement.remove)
         this.styleElement.remove();
       else if (this.styleElement.parentNode)
         this.styleElement.parentNode.removeChild(this.styleElement);
+
+      this.styleElement = null;
     }    
   }
 
   private define(name?: string): KeyframeGenerator {
+    const appendToBody = !!this.styleElement;
+
+    if (appendToBody)
+      this.styleElement = document.createElement('style');
+
     this.name = name || KeyframeGenerator.generateName();
-    this.styleElement = document.createElement('style');
     this.styleElement.innerHTML = this.get('css', { name: this.name, prefix: true }) as string;
 
-    document.body.appendChild(this.styleElement);
+    if (appendToBody)
+      document.body.appendChild(this.styleElement);
+
     return(this);
   }
 
@@ -233,11 +272,6 @@ interface ApplyToOptions {
    * Play the animation infinitely.
    */
   loop?: boolean,
-  /**
-   * Remove the animation property from the element and CSS style element from the document 
-   * after the animation is done.
-   */
-  remove?: boolean,
   /**
    * Callback specified function after the animation is done.
    */

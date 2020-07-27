@@ -1,5 +1,6 @@
 export class KeyframeGenerator {
     constructor() {
+        this.unfinishedAnimations = [];
         this.duration = 0;
         // No-op
     }
@@ -84,6 +85,16 @@ export class KeyframeGenerator {
         this.define();
         prefixes = this.getPrefixes();
         return (new Promise(resolve => {
+            const finish = () => {
+                elements.forEach(element => {
+                    prefixes.animation.forEach(prefix => {
+                        element.style.removeProperty(`${prefix}animation`);
+                    });
+                });
+                if (options.onComplete)
+                    options.onComplete();
+                resolve();
+            };
             elements.forEach(element => {
                 prefixes.animation.forEach(prefix => {
                     css = [this.name, `${this.duration}ms`, 'linear', 'both'];
@@ -94,28 +105,45 @@ export class KeyframeGenerator {
             });
             if (!options.loop) {
                 setTimeout(() => {
-                    if (options.remove)
-                        this.remove();
-                    if (options.onComplete)
-                        options.onComplete();
-                    resolve();
+                    const index = this.unfinishedAnimations.indexOf(finish);
+                    if (index >= 0) {
+                        this.unfinishedAnimations.splice(index, 1);
+                        finish();
+                        this.cleanup();
+                    }
                 }, this.duration);
             }
+            this.unfinishedAnimations.push(finish);
         }));
     }
-    remove() {
-        if (this.styleElement) {
+    /**
+     * Stop all animations that were created with applyTo.
+     */
+    abort() {
+        let finish;
+        while (finish = this.unfinishedAnimations.shift()) {
+            finish();
+        }
+        ;
+        this.cleanup();
+    }
+    cleanup() {
+        if (this.unfinishedAnimations.length === 0 && this.styleElement) {
             if (this.styleElement.remove)
                 this.styleElement.remove();
             else if (this.styleElement.parentNode)
                 this.styleElement.parentNode.removeChild(this.styleElement);
+            this.styleElement = null;
         }
     }
     define(name) {
+        const appendToBody = !!this.styleElement;
+        if (appendToBody)
+            this.styleElement = document.createElement('style');
         this.name = name || KeyframeGenerator.generateName();
-        this.styleElement = document.createElement('style');
         this.styleElement.innerHTML = this.get('css', { name: this.name, prefix: true });
-        document.body.appendChild(this.styleElement);
+        if (appendToBody)
+            document.body.appendChild(this.styleElement);
         return (this);
     }
     getPrefixes(force) {
