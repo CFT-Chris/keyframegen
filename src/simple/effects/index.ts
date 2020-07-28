@@ -9,7 +9,10 @@ class Effect {
 }
 
 interface EffectOptions {
-
+  /**
+   * Specify the duration in milliseconds for one animation iteration. Default: **1000**
+   */
+  duration?: number
 }
 
 export { Effect, EffectOptions };

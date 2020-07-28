@@ -74,7 +74,9 @@ class Simple extends KeyframeGenerator {
   private effect: Effect;
 
   constructor() {
-    super();    
+    super();
+    
+    this.updateDuration(1000);
   }
 
   /**
@@ -84,6 +86,9 @@ class Simple extends KeyframeGenerator {
    */
   set<K extends keyof SimpleEffects>(effect: K, options?: SimpleEffects[K]): this {
     this.effect = new Simple.EffectClasses[effect](options);
+    
+    if ('duration' in options)
+      this.updateDuration(options.duration);
 
     return(this);
   }

@@ -100,10 +100,11 @@ export class KeyframeGenerator {
    * @returns Promise that resolves once the animation is completed.  Infinite animations never resolve.
    */
   applyTo(el: HTMLElement | HTMLElement[], options: ApplyToOptions = {}): Promise<void> {
-    const elements: HTMLElement[] = !Array.isArray(el)
+    let elements: HTMLElement[] = !Array.isArray(el)
       ? [el]
       : el;
-    let prefixes: CSSPropPrefixes, css;
+    let prefixes: CSSPropPrefixes;
+    let css: string[];
 
     this.define();
 
@@ -176,7 +177,7 @@ export class KeyframeGenerator {
   }
 
   private define(name?: string): KeyframeGenerator {
-    const appendToBody = !!this.styleElement;
+    const appendToBody = !this.styleElement;
 
     if (appendToBody)
       this.styleElement = document.createElement('style');
