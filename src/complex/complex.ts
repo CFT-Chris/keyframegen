@@ -53,8 +53,17 @@ class Complex extends KeyframeGenerator {
     return(this);
   }
 
-  protected serialize = (): any[] => this.components.map(component => component.serialize());
-  protected deserialize(serialized: ComponentOptions[]): this {
+  /**
+   * Outputs the Complex composition to an array of component options that can be 
+   * reloaded via {@link deserialize}. Useful for saving preset animations.
+   */
+  serialize = (): any[] => this.components.map(component => component.serialize());
+
+  /**
+   * Reload a Complex composition from a {@link serialize}d operation.
+   * @param serialized Array of ComponentOptions objects from {@link serialize}
+   */
+  deserialize(serialized: ComponentOptions[]): this {
     serialized.forEach(options => {
       if (Complex.ComponentClasses.hasOwnProperty(options.type))
         this.addComponent(new Complex.ComponentClasses[options.type](options));

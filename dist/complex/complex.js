@@ -29,6 +29,10 @@ class Complex extends KeyframeGenerator {
         this.rotate = (options) => this.addComponent(new Complex.ComponentClasses.rotate(options));
         this.translate = (options) => this.addComponent(new Complex.ComponentClasses.translate(options));
         this.skew = (options) => this.addComponent(new Complex.ComponentClasses.skew(options));
+        /**
+         * Outputs the Complex composition to an array of component options that can be
+         * reloaded via {@link deserialize}. Useful for saving preset animations.
+         */
         this.serialize = () => this.components.map(component => component.serialize());
         this.components = [];
     }
@@ -37,6 +41,10 @@ class Complex extends KeyframeGenerator {
         this.updateDuration();
         return (this);
     }
+    /**
+     * Reload a Complex composition from a {@link serialize}d operation.
+     * @param serialized Array of ComponentOptions objects from {@link serialize}
+     */
     deserialize(serialized) {
         serialized.forEach(options => {
             if (Complex.ComponentClasses.hasOwnProperty(options.type))
