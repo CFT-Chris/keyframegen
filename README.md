@@ -6,6 +6,11 @@ A JavaScript/TypeScript library that generates keyframes of common animations.  
 npm i keyframegen
 ```
 
+## Demo/Sandbox
+[![Visit Sandbox](https://raw.githubusercontent.com/CFT-Chris/keyframegen-sandbox/master/public/screenshot.gif)](https://cft-chris.github.io/keyframegen-sandbox/)
+
+[View Sandbox](https://cft-chris.github.io/keyframegen-sandbox/)
+
 ## ES Module Usage
 ```ts
 import { Complex } from 'keyframegen';
@@ -152,5 +157,4 @@ View the [documentation](https://cft-chris.github.io/keyframegen).
 View the [GitHub repo](https://github.com/CFT-Chris/keyframegen).
 
 ### Todo
-* Interactive Sandbox
 * 3D transformations for Complex

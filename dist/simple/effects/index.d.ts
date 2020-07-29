@@ -5,7 +5,7 @@ declare class Effect {
 }
 interface EffectOptions {
     /**
-     * Specify the duration in milliseconds for one animation iteration. Default: **500**
+     * Specify the duration in milliseconds for one animation iteration. Default: **1000**
      */
     duration?: number;
 }

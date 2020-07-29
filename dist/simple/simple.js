@@ -31,7 +31,7 @@ import { Vertical } from './effects/vertical';
 class Simple extends KeyframeGenerator {
     constructor() {
         super();
-        this.updateDuration(500);
+        this.updateDuration(1000);
     }
     /**
      * Sets the simple effect to use.
@@ -40,10 +40,8 @@ class Simple extends KeyframeGenerator {
      */
     set(effect, options) {
         this.effect = new Simple.EffectClasses[effect](options);
-        if ('duration' in options) {
-            console.log('foobar', options.duration);
+        if ('duration' in options)
             this.updateDuration(options.duration);
-        }
         return (this);
     }
     getWebAPIKeyframes(_options = {}) {
