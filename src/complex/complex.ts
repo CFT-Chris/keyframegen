@@ -7,7 +7,7 @@ import { Component, ComponentOptions } from './components';
 import { KeyframeGenerator, WebAPIKeyframe, KeyframeOptions } from '../keyframegen';
 
 /**
- * Construct a complex 2D animation using a composition of any number of the following transforms:
+ * Construct a complex 2D animation using a chained composition of any number of the following transforms:
  * * scale
  * * rotate
  * * translate
@@ -51,6 +51,22 @@ class Complex extends KeyframeGenerator {
     this.updateDuration();
 
     return(this);
+  }
+
+  /**
+   * Removes a component from the transformation chain.
+   * @param index Remove transformation component at index; if omitted, all components are removed
+   */
+  remove(index?: number): this {
+    this.components.splice(index, 1);
+    return(this);
+  }
+
+  /**
+   * Clears all components from the transformation chain.
+   */
+  clear(): this {
+    return(this.remove());
   }
 
   /**

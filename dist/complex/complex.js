@@ -5,7 +5,7 @@ import Translate from './components/translate';
 import Skew from './components/skew';
 import { KeyframeGenerator } from '../keyframegen';
 /**
- * Construct a complex 2D animation using a composition of any number of the following transforms:
+ * Construct a complex 2D animation using a chained composition of any number of the following transforms:
  * * scale
  * * rotate
  * * translate
@@ -40,6 +40,20 @@ class Complex extends KeyframeGenerator {
         this.components.push(component);
         this.updateDuration();
         return (this);
+    }
+    /**
+     * Removes a component from the transformation chain.
+     * @param index Remove transformation component at index; if omitted, all components are removed
+     */
+    remove(index) {
+        this.components.splice(index, 1);
+        return (this);
+    }
+    /**
+     * Clears all components from the transformation chain.
+     */
+    clear() {
+        return (this.remove());
     }
     /**
      * Reload a Complex composition from a {@link serialize}d operation.

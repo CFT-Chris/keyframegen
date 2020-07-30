@@ -1,7 +1,7 @@
 import { Component, ComponentOptions } from './components';
 import { KeyframeGenerator, WebAPIKeyframe, KeyframeOptions } from '../keyframegen';
 /**
- * Construct a complex 2D animation using a composition of any number of the following transforms:
+ * Construct a complex 2D animation using a chained composition of any number of the following transforms:
  * * scale
  * * rotate
  * * translate
@@ -30,6 +30,15 @@ declare class Complex extends KeyframeGenerator {
     translate: (options?: ComponentOptions) => this;
     skew: (options?: ComponentOptions) => this;
     private addComponent;
+    /**
+     * Removes a component from the transformation chain.
+     * @param index Remove transformation component at index; if omitted, all components are removed
+     */
+    remove(index?: number): this;
+    /**
+     * Clears all components from the transformation chain.
+     */
+    clear(): this;
     /**
      * Outputs the Complex composition to an array of component options that can be
      * reloaded via {@link deserialize}. Useful for saving preset animations.
