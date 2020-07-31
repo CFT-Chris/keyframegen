@@ -1,6 +1,6 @@
 {
   "name": "keyframegen",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A JS library that generates keyframes of common animations. For use with Web Animation API or plain CSS.",
   "main": "dist/keyframegen.min.js",
   "module": "dist/index.js",
