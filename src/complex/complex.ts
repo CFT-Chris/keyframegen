@@ -33,12 +33,11 @@ class Complex extends KeyframeGenerator {
   };
   protected static FPS: number = 30;
 
-  protected components: Component[] = null;
+  protected components: Component[] = [];
   protected keys: number[];
 
   constructor() {
     super();
-    this.components = [];
   }
 
   scale = (options?: ComponentOptions): this => this.addComponent(new Complex.ComponentClasses.scale(options));
@@ -58,7 +57,11 @@ class Complex extends KeyframeGenerator {
    * @param index Remove transformation component at index; if omitted, all components are removed
    */
   remove(index?: number): this {
-    this.components.splice(index, 1);
+    if (index === undefined)
+      this.components = [];
+    else
+      this.components.splice(index, 1);
+      
     return(this);
   }
 

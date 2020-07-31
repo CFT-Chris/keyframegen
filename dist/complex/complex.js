@@ -24,7 +24,7 @@ import { KeyframeGenerator } from '../keyframegen';
 class Complex extends KeyframeGenerator {
     constructor() {
         super();
-        this.components = null;
+        this.components = [];
         this.scale = (options) => this.addComponent(new Complex.ComponentClasses.scale(options));
         this.rotate = (options) => this.addComponent(new Complex.ComponentClasses.rotate(options));
         this.translate = (options) => this.addComponent(new Complex.ComponentClasses.translate(options));
@@ -34,7 +34,6 @@ class Complex extends KeyframeGenerator {
          * reloaded via {@link deserialize}. Useful for saving preset animations.
          */
         this.serialize = () => this.components.map(component => component.serialize());
-        this.components = [];
     }
     addComponent(component) {
         this.components.push(component);
@@ -46,7 +45,10 @@ class Complex extends KeyframeGenerator {
      * @param index Remove transformation component at index; if omitted, all components are removed
      */
     remove(index) {
-        this.components.splice(index, 1);
+        if (index === undefined)
+            this.components = [];
+        else
+            this.components.splice(index, 1);
         return (this);
     }
     /**
