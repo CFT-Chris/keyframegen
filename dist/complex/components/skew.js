@@ -29,6 +29,8 @@ class Skew extends Component {
             const easedVector = this.fromVector.clone().add(this.diff.clone().multiply(easedRatio));
             return (this.getMatrix(easedVector.x, easedVector.y));
         };
+        this.from = options.from || this.from;
+        this.to = options.to || this.to;
         this.fromVector = new Vector2D(this.from.x, this.from.y);
         this.toVector = new Vector2D(this.to.x, this.to.y);
         this.diff = this.toVector.clone().subtract(this.fromVector);

@@ -24,7 +24,9 @@ class Component {
   easingObject: Easing;
 
   constructor(options: ComponentOptions = {}) {
-    Object.assign(this, options);
+    this.easing = options.easing || this.easing;
+    this.duration = options.duration || this.duration;
+    this.delay = options.delay || this.delay;
 
     this.easingObject = new Component.EasingClasses[this.easing](options);
   }

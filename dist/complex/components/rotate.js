@@ -21,6 +21,8 @@ class Rotate extends Component {
             const easedAngle = this.from + this.diff * easedRatio;
             return (this.getMatrix(easedAngle));
         };
+        this.from = options.from || this.from;
+        this.to = options.to || this.to;
         this.diff = this.to - this.from;
     }
 }

@@ -9,6 +9,9 @@ class Rotate extends Component {
 
   constructor(options: ComponentOptions = {}) {
     super(options);
+    
+    this.from = (options.from as number)|| this.from;
+    this.to = (options.to as number) || this.to;
     this.diff = this.to - this.from;
   }
 

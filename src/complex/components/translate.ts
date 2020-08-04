@@ -18,6 +18,9 @@ class Translate extends Component {
 
   constructor(options: ComponentOptions = {}) {
     super(options);
+
+    this.from = (options.from as Coordinate) || this.from;
+    this.to = (options.to as Coordinate) || this.to;
     this.fromVector = new Vector2D(this.from.x, this.from.y);
     this.toVector = new Vector2D(this.to.x, this.to.y);
     this.diff = this.toVector.clone().subtract(this.fromVector);
