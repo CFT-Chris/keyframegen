@@ -3,6 +3,8 @@ import Vector2D from '../math/vector2d';
 import { Component, Coordinate, ComponentOptions } from './index';
 
 class Translate extends Component {
+  protected readonly componentType: string = 'translate';
+
   from: Coordinate = {
     x: 0,
     y: 0

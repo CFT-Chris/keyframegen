@@ -2,6 +2,8 @@ import Matrix4D from '../math/matrix4d';
 import { Component, ComponentOptions } from './index';
 
 class Rotate extends Component {
+  protected readonly componentType: string = 'rotate';
+
   from: number = 0;
   to: number = 90;
 

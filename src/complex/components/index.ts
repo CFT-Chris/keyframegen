@@ -9,6 +9,8 @@ type EasingType = 'bounce' | 'sway' | 'hardbounce' | 'hardsway';
 
 class Component {
 
+  protected readonly componentType: string = 'unknown';
+
   private static readonly EasingClasses: { [type: string]: any } = {
     bounce: EasingBounce,
     sway: SwayEasing,
@@ -40,7 +42,7 @@ class Component {
   
   serialize = (): ComponentOptions =>
     Object.assign({
-      type: this.constructor.name.toLowerCase(),
+      type: this.componentType,
       easing: this.easing,
       duration: this.duration,
       delay: this.delay,

@@ -4,6 +4,8 @@ import Vector2D from '../math/vector2d';
 import { Component, Coordinate, ComponentOptions } from './index';
 
 class Scale extends Component {
+  protected readonly componentType: string = 'scale';
+
   from: Coordinate = {
     x: 0.5,
     y: 0.5

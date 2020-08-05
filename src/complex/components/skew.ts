@@ -4,6 +4,8 @@ import Vector2D from '../math/vector2d';
 import { Component, Coordinate, ComponentOptions } from './index';
 
 class Skew extends Component {
+  protected readonly componentType: string = 'skew';
+
   from: Coordinate = {
     x: 0,
     y: 0

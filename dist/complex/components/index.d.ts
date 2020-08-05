@@ -2,6 +2,7 @@ import Matrix4D from '../math/matrix4d';
 import { EasingOptions, Easing } from '../easing';
 declare type EasingType = 'bounce' | 'sway' | 'hardbounce' | 'hardsway';
 declare class Component {
+    protected readonly componentType: string;
     private static readonly EasingClasses;
     easing: string;
     duration: number;

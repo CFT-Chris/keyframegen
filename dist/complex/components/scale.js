@@ -4,6 +4,7 @@ import { Component } from './index';
 class Scale extends Component {
     constructor(options = {}) {
         super(options);
+        this.componentType = 'scale';
         this.from = {
             x: 0.5,
             y: 0.5

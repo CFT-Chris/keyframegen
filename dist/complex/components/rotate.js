@@ -3,6 +3,7 @@ import { Component } from './index';
 class Rotate extends Component {
     constructor(options = {}) {
         super(options);
+        this.componentType = 'rotate';
         this.from = 0;
         this.to = 90;
         this.getMatrix = (degrees) => {

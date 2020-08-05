@@ -4,6 +4,7 @@ import { Component } from './index';
 class Skew extends Component {
     constructor(options = {}) {
         super(options);
+        this.componentType = 'skew';
         this.from = {
             x: 0,
             y: 0

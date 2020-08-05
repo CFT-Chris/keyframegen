@@ -5,6 +5,7 @@ import HardBounce from '../easing/hardbounce';
 import HardSwayEasing from '../easing/hardsway';
 class Component {
     constructor(options = {}) {
+        this.componentType = 'unknown';
         this.easing = 'bounce';
         this.duration = 1000;
         this.delay = 0;
@@ -13,7 +14,7 @@ class Component {
         this.getMatrix = (_x, _y) => new Matrix4D().identity();
         this.getEasedMatrix = (_ratio) => this.getMatrix();
         this.serialize = () => Object.assign({
-            type: this.constructor.name.toLowerCase(),
+            type: this.componentType,
             easing: this.easing,
             duration: this.duration,
             delay: this.delay,

@@ -4,6 +4,7 @@ import { Component } from './index';
 class Translate extends Component {
     constructor(options = {}) {
         super(options);
+        this.componentType = 'translate';
         this.from = {
             x: 0,
             y: 0
