@@ -22,7 +22,7 @@ export declare class KeyframeGenerator {
      * and then sets the CSS of the given HTML elements to use those animations.
      * @param el
      * @param options
-     * @returns Promise that resolves once the animation is completed.  Infinite animations never resolve.
+     * @returns Promise that resolves once the animation is completed and the animation style removed.  Infinite animations never resolve.
      */
     applyTo(el: HTMLElement | HTMLElement[], options?: ApplyToOptions): Promise<void>;
     /**

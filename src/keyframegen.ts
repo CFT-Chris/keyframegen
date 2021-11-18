@@ -97,7 +97,7 @@ export class KeyframeGenerator {
    * and then sets the CSS of the given HTML elements to use those animations.
    * @param el 
    * @param options 
-   * @returns Promise that resolves once the animation is completed.  Infinite animations never resolve.
+   * @returns Promise that resolves once the animation is completed and the animation style removed.  Infinite animations never resolve.
    */
   applyTo(el: HTMLElement | HTMLElement[], options: ApplyToOptions = {}): Promise<void> {
     let elements: HTMLElement[] = !Array.isArray(el)
@@ -111,15 +111,15 @@ export class KeyframeGenerator {
     prefixes = this.getPrefixes();
 
     return (new Promise(resolve => {
-      const finish = () => {
+      const finish = async () => {
+        if (options.onComplete)
+          await options.onComplete();
+
         elements.forEach(element => {
           prefixes.animation.forEach(prefix => {
             element.style.removeProperty(`${prefix}animation`);
           });
         });
-
-        if (options.onComplete)
-          options.onComplete();
 
         resolve();
       };
